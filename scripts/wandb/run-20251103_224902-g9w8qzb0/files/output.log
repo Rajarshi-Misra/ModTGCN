@@ -1,0 +1,4 @@
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 752/752 [12:50<00:00,  1.02s/it]                                                                       
+{'loss': 2.1004, 'grad_norm': 8.54541015625, 'learning_rate': 7.654320987654322e-06, 'epoch': 2.66}
+{'train_runtime': 774.5054, 'train_samples_per_second': 30.936, 'train_steps_per_second': 0.971, 'train_loss': 1.846845992068027, 'epoch': 4.0}
+Training complete. Model saved to: ../models/sbert/ohsumed/checkpoint

@@ -1,0 +1,13 @@
+{"time":"2025-11-14T23:34:21.07698142+05:30","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpx2cm690d/port-1683837.txt","pid":1683837,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false}
+{"time":"2025-11-14T23:34:21.078216295+05:30","level":"INFO","msg":"Will exit if parent process dies.","ppid":1683837}
+{"time":"2025-11-14T23:34:21.078087914+05:30","level":"INFO","msg":"server is running","addr":{"IP":"127.0.0.1","Port":33869,"Zone":""}}
+{"time":"2025-11-14T23:34:21.262603239+05:30","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"127.0.0.1:58108"}
+{"time":"2025-11-14T23:34:21.274448299+05:30","level":"INFO","msg":"handleInformInit: received","streamId":"micfr77p","id":"127.0.0.1:58108"}
+{"time":"2025-11-14T23:34:21.386052803+05:30","level":"INFO","msg":"handleInformInit: stream started","streamId":"micfr77p","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:02.456763555+05:30","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:02.456861538+05:30","level":"INFO","msg":"connection: Close: initiating connection closure","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:02.456953728+05:30","level":"INFO","msg":"server is shutting down"}
+{"time":"2025-11-15T00:05:02.457054844+05:30","level":"INFO","msg":"connection: Close: connection successfully closed","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:06.993635588+05:30","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:06.993680012+05:30","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"127.0.0.1:58108"}
+{"time":"2025-11-15T00:05:06.993707401+05:30","level":"INFO","msg":"server is closed"}

@@ -1,0 +1,42 @@
+{
+  "os":  "Linux-6.8.0-85-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.2",
+  "startedAt":  "2025-11-14T19:21:06.751933Z",
+  "args":  [
+    "--dataset",
+    "20ng"
+  ],
+  "program":  "/home/aditya/Modified_TextGCN/latest_modularity/scripts/train_sbert.py",
+  "codePath":  "train_sbert.py",
+  "email":  "spranav1205@gmail.com",
+  "root":  "/home/aditya/Modified_TextGCN/latest_modularity/scripts",
+  "host":  "a10080gb",
+  "executable":  "/home/aditya/miniconda3/envs/graph/bin/python",
+  "codePathLocal":  "train_sbert.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "gpu":  "NVIDIA A100 80GB PCIe",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "4689458741248",
+      "used":  "3744434143232"
+    }
+  },
+  "memory":  {
+    "total":  "67100930048"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A100 80GB PCIe",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere"
+    }
+  ],
+  "cudaVersion":  "12.4"
+}

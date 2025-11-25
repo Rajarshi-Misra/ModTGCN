@@ -1,0 +1,10 @@
+{"time":"2025-11-14T23:21:25.837397547+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.4","symlink path":"/home/aditya/Modified_TextGCN/latest_modularity/scripts/wandb/run-20251114_232125-p2eq1r35/logs/debug-core.log"}
+{"time":"2025-11-14T23:21:25.948113174+05:30","level":"INFO","msg":"created new stream","id":"p2eq1r35"}
+{"time":"2025-11-14T23:21:25.948167607+05:30","level":"INFO","msg":"stream: started","id":"p2eq1r35"}
+{"time":"2025-11-14T23:21:25.948203976+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"p2eq1r35"}
+{"time":"2025-11-14T23:21:25.948265622+05:30","level":"INFO","msg":"handler: started","stream_id":"p2eq1r35"}
+{"time":"2025-11-14T23:21:25.948325812+05:30","level":"INFO","msg":"sender: started","stream_id":"p2eq1r35"}
+{"time":"2025-11-14T23:21:26.711379925+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-11-14T23:22:27.861584432+05:30","level":"INFO","msg":"stream: closing","id":"p2eq1r35"}
+{"time":"2025-11-14T23:22:27.861639607+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-11-14T23:22:27.862826164+05:30","level":"INFO","msg":"Stopped system monitor"}

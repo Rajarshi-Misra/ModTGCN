@@ -1,0 +1,15 @@
+{"time":"2025-11-05T14:49:18.159678399+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.4","symlink path":"/home/aditya/Modified_TextGCN/latest_modularity/scripts/wandb/run-20251105_144917-mx0durmu/logs/debug-core.log"}
+{"time":"2025-11-05T14:49:18.268593405+05:30","level":"INFO","msg":"created new stream","id":"mx0durmu"}
+{"time":"2025-11-05T14:49:18.268627482+05:30","level":"INFO","msg":"stream: started","id":"mx0durmu"}
+{"time":"2025-11-05T14:49:18.268733716+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:18.268870809+05:30","level":"INFO","msg":"sender: started","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:18.268957025+05:30","level":"INFO","msg":"handler: started","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:18.824411105+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-11-05T14:49:19.551142415+05:30","level":"INFO","msg":"stream: closing","id":"mx0durmu"}
+{"time":"2025-11-05T14:49:19.827131554+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-11-05T14:49:19.828172418+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-11-05T14:49:21.93101101+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-05T14:49:22.501255456+05:30","level":"INFO","msg":"handler: closed","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:22.501342186+05:30","level":"INFO","msg":"sender: closed","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:22.501337486+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"mx0durmu"}
+{"time":"2025-11-05T14:49:22.501557315+05:30","level":"INFO","msg":"stream: closed","id":"mx0durmu"}

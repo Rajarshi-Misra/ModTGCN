@@ -1,0 +1,14 @@
+{"time":"2025-11-14T23:29:43.187277193+05:30","level":"INFO","msg":"main: starting server","port-filename":"/tmp/tmpxdof0i1d/port-1683174.txt","pid":1683174,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false}
+{"time":"2025-11-14T23:29:43.188269621+05:30","level":"INFO","msg":"server is running","addr":{"IP":"127.0.0.1","Port":43189,"Zone":""}}
+{"time":"2025-11-14T23:29:43.188416978+05:30","level":"INFO","msg":"Will exit if parent process dies.","ppid":1683174}
+{"time":"2025-11-14T23:29:43.373923529+05:30","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:43.387824422+05:30","level":"INFO","msg":"handleInformInit: received","streamId":"mebvw5u7","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:43.497406804+05:30","level":"INFO","msg":"handleInformInit: stream started","streamId":"mebvw5u7","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:44.513750672+05:30","level":"INFO","msg":"handleInformTeardown: server teardown initiated","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:44.513829614+05:30","level":"INFO","msg":"connection: Close: initiating connection closure","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:44.513839496+05:30","level":"INFO","msg":"server is shutting down"}
+{"time":"2025-11-14T23:29:44.513994524+05:30","level":"INFO","msg":"connection: Close: connection successfully closed","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:44.75591113+05:30","level":"ERROR","msg":"processOutgoingData: flush error","error":"write tcp 127.0.0.1:43189->127.0.0.1:55456: use of closed network connection","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:47.245817801+05:30","level":"INFO","msg":"handleInformTeardown: server shutdown complete","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:47.245855844+05:30","level":"INFO","msg":"connection: ManageConnectionData: connection closed","id":"127.0.0.1:55456"}
+{"time":"2025-11-14T23:29:47.245882133+05:30","level":"INFO","msg":"server is closed"}

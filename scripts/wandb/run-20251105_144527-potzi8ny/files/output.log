@@ -1,0 +1,92 @@
+  0%|                                                                                                                                                                                  | 0/724 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/aditya/Modified_TextGCN/latest_modularity/scripts/train_sbert.py", line 97, in <module>
+    main()
+  File "/home/aditya/Modified_TextGCN/latest_modularity/scripts/train_sbert.py", line 83, in main
+    model.fit(
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/sentence_transformers/fit_mixin.py", line 385, in fit
+    trainer.train()
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/trainer.py", line 2171, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/trainer.py", line 2531, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/trainer.py", line 3675, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/sentence_transformers/trainer.py", line 405, in compute_loss
+    loss = loss_fn(features, labels)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/sentence_transformers/losses/MultipleNegativesRankingLoss.py", line 103, in forward
+    embeddings = [self.model(sentence_feature)["sentence_embedding"] for sentence_feature in sentence_features]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/sentence_transformers/SentenceTransformer.py", line 690, in forward
+    input = module(input, **module_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/sentence_transformers/models/Transformer.py", line 442, in forward
+    output_states = self.auto_model(**trans_features, **kwargs, return_dict=False)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 544, in forward
+    encoder_outputs = self.encoder(
+                      ^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 334, in forward
+    layer_outputs = layer_module(
+                    ^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 293, in forward
+    self_attention_outputs = self.attention(
+                             ^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 234, in forward
+    self_outputs = self.attn(
+                   ^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aditya/miniconda3/envs/graph/lib/python3.12/site-packages/transformers/models/mpnet/modeling_mpnet.py", line 170, in forward
+    attention_scores = torch.matmul(q, k.transpose(-1, -2))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 216.00 MiB. GPU 0 has a total capacity of 79.14 GiB of which 156.00 MiB is free. Process 842701 has 31.89 GiB memory in use. Process 965122 has 8.45 GiB memory in use. Process 967901 has 18.08 GiB memory in use. Including non-PyTorch memory, this process has 20.54 GiB memory in use. Of the allocated memory 19.99 GiB is allocated by PyTorch, and 58.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

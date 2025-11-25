@@ -1,0 +1,16 @@
+{"time":"2025-11-15T00:51:06.756361105+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.4","symlink path":"/home/aditya/Modified_TextGCN/latest_modularity/scripts/wandb/run-20251115_005106-ak2l7q95/logs/debug-core.log"}
+{"time":"2025-11-15T00:51:06.867546896+05:30","level":"INFO","msg":"created new stream","id":"ak2l7q95"}
+{"time":"2025-11-15T00:51:06.867612674+05:30","level":"INFO","msg":"stream: started","id":"ak2l7q95"}
+{"time":"2025-11-15T00:51:06.867742282+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T00:51:06.867829115+05:30","level":"INFO","msg":"sender: started","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T00:51:06.867970155+05:30","level":"INFO","msg":"handler: started","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T00:51:07.498737273+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-11-15T01:07:53.965691912+05:30","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/spranav1205-bits-pilani/sentence-transformers/ak2l7q95/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2025-11-15T04:59:30.066499775+05:30","level":"INFO","msg":"stream: closing","id":"ak2l7q95"}
+{"time":"2025-11-15T04:59:30.066552539+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-11-15T04:59:30.083533113+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-11-15T04:59:32.795449441+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-11-15T04:59:33.797875154+05:30","level":"INFO","msg":"handler: closed","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T04:59:33.797932996+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T04:59:33.79798844+05:30","level":"INFO","msg":"sender: closed","stream_id":"ak2l7q95"}
+{"time":"2025-11-15T04:59:33.798065196+05:30","level":"INFO","msg":"stream: closed","id":"ak2l7q95"}
