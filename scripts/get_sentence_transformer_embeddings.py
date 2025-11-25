@@ -66,8 +66,8 @@ train_embeddings = sbert_model.encode(df_train['text'].values, convert_to_tensor
 val_embeddings = sbert_model.encode(df_val['text'].values, convert_to_tensor=True)
 test_embeddings = sbert_model.encode(df_test['text'].values, convert_to_tensor=True)
 
-os.makedirs(f'../embeddings/sbert_fine_tuned/{args.dataset}', exist_ok=True) ##NOTE: This also needs to be changed
-path = f'../embeddings/sbert_fine_tuned/{args.dataset}' ##NOTE: This also needs to be changed
+os.makedirs(f'../embeddings/sbert/{args.dataset}', exist_ok=True) ##NOTE: This also needs to be changed
+path = f'../embeddings/sbert/{args.dataset}' ##NOTE: This also needs to be changed
 np.save(f'{path}/train_embeddings.npy', train_embeddings.cpu().numpy())
 np.save(f'{path}/val_embeddings.npy', val_embeddings.cpu().numpy())
 np.save(f'{path}/test_embeddings.npy', test_embeddings.cpu().numpy())

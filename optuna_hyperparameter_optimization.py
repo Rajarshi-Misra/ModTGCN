@@ -88,12 +88,12 @@ try:
     # Save Pareto plot
     fig = vis.plot_pareto_front(study, target_names=["Micro F1", "Macro F1"])
     #NOTE: Modify the name here
-    fig.write_html(f"results/hyperparameter_plots_fine_tuned/pareto_front_{label_type}_{graph_weight_adj}_{graph_construction}_{dataset}.html")
+    fig.write_html(f"results/hyperparameter_plots/pareto_front_{label_type}_{graph_weight_adj}_{graph_construction}_{dataset}.html")
 
     # Save best hyperparameters
-    os.makedirs('results/best_hyperparam_fine_tuned', exist_ok=True)
+    os.makedirs('results/best_hyperparam', exist_ok=True)
     #NOTE: Modify the name here
-    with open(f"results/best_hyperparams_fine_tuned/{label_type}_{graph_weight_adj}_{graph_construction}_{dataset}_hyperparams.txt", "w") as f:
+    with open(f"results/best_hyperparams/{label_type}_{graph_weight_adj}_{graph_construction}_{dataset}_hyperparams.txt", "w") as f:
         for t in study.best_trials:
             f.write(f"Micro F1: {t.values[0]:.4f}, Macro F1: {t.values[1]:.4f}, Params: {t.params}\n")
 

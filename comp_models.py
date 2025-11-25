@@ -193,7 +193,7 @@ def main(args):
 
 def save_results(results, args):
     # Build directory structure
-    case_dir = f"{args.label_type}_{args.modify_graph}_{args.graph_construction}_fine_tuned"
+    case_dir = f"{args.label_type}_{args.modify_graph}_{args.graph_construction}"
     # dataset_dir = args.dataset
 
     save_dir = os.path.join(args.results_dir, case_dir)

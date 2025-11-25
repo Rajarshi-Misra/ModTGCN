@@ -1,0 +1,4 @@
+Micro F1: 94.8012, Macro F1: 82.0047, Params: {'dropout_rate': 0.0, 'lr': 0.04897663290835707, 'gamma': 0.24768052629448467, 'mod_weight': 0.4, 'increase': 1.2, 'decrease': 0.6000000000000001, 'k': 12}
+Micro F1: 95.4128, Macro F1: 80.3120, Params: {'dropout_rate': 0.1, 'lr': 0.0074392639791000525, 'gamma': 0.9169814170585667, 'mod_weight': 0.1, 'increase': 1.2, 'decrease': 0.6000000000000001, 'k': 14}
+Micro F1: 94.3425, Macro F1: 82.1903, Params: {'dropout_rate': 0.1, 'lr': 0.02421231604248689, 'gamma': 0.9778985058859654, 'mod_weight': 0.30000000000000004, 'increase': 2.0, 'decrease': 0.6000000000000001, 'k': 11}
+Micro F1: 94.0367, Macro F1: 82.9230, Params: {'dropout_rate': 0.2, 'lr': 0.028568908436698296, 'gamma': 1.4131446909258962, 'mod_weight': 0.30000000000000004, 'increase': 2.0, 'decrease': 0.6000000000000001, 'k': 11}

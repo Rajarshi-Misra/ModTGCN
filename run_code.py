@@ -31,7 +31,7 @@ if __name__ == '__main__':
     # locate the correct hyperparameter file
     script_dir = os.path.dirname(os.path.abspath(__file__))
     filename = f"{label_type}_{graph_weight_adj}_{graph_construction}_{dataset}_hyperparams.txt"
-    filepath = os.path.join(script_dir, "results", "best_hyperparams_fine_tuned", filename)
+    filepath = os.path.join(script_dir, "results", "best_hyperparams", filename)
     
     if not os.path.isfile(filepath):
         raise FileNotFoundError(f"Hyperparameter file not found: {filepath}")
@@ -58,7 +58,7 @@ if __name__ == '__main__':
             f"--no-hyperparameter_tuning "
             f"--label_type {label_type} "
             f"--graph_construction {graph_construction} "
-            f"--llm models/sbert/{dataset}/checkpoint "
+            # f"--llm models/sbert/{dataset}/checkpoint "
         )
         if graph_weight_adj == "True":
             command += (

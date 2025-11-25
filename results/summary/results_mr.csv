@@ -1,0 +1,2 @@
+,model,mr_micro_f1,mr_macro_f1,r8_micro_f1,r8_macro_f1,r52_micro_f1,r52_macro_f1,ohsumed_micro_f1,ohsumed_macro_f1,20ng_micro_f1,20ng_macro_f1
+0,GCN_DVpDT_TG,76.32(0.41),76.29(0.4),96.74(0.13),91.59(0.64),93.35(0.12),71.17(0.36),66.91(0.48),61.44(0.52),85.51(0.14),85.04(0.14)

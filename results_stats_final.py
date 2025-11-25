@@ -19,7 +19,7 @@ datasets = ["mr", "r8", "r52", "ohsumed", "20ng"]
 # Map existing directories
 case_map = {}
 for sub_dir in results_dir.iterdir():
-    if not (sub_dir.is_dir() and sub_dir.name.endswith("_fine_tuned")):
+    if not (sub_dir.is_dir() and sub_dir.name.endswith("_fine_tuned")):##NOTE: THIS IS FOR SUMMARIZING fine_tuned results only
         continue
     parts = sub_dir.name.split("_")
     if len(parts) != 6:  # Must be: true_label_False_gaussian_fine_tuned (6 parts)

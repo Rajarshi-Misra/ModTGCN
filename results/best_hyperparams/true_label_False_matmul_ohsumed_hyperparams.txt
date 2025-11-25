@@ -1,0 +1,2 @@
+Micro F1: 71.7262, Macro F1: 64.5807, Params: {'dropout_rate': 0.4, 'lr': 0.00719821139321128, 'gamma': 1.6700263950970426, 'mod_weight': 0.2}
+Micro F1: 70.8333, Macro F1: 65.4033, Params: {'dropout_rate': 0.4, 'lr': 0.04151810916822702, 'gamma': 2.9572516511814997, 'mod_weight': 0.2}
