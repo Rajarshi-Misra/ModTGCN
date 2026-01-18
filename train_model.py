@@ -7,50 +7,8 @@ import os
 import matplotlib.pyplot as plt
 
 path = os.path.dirname(os.path.abspath(__file__))
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
-def parameters_norm(model):
-    param_norm = [torch.norm(p.detach()) for p in model.parameters() if p.requires_grad]
-    return param_norm
-
-import torch
-
-def compute_Qg(A: torch.Tensor, soft_labels: torch.Tensor, chi=1.0):
-    m = A.sum() / 2
-    H = soft_labels.T  # shape: (C, N)
-    intra_c = torch.matmul(H, torch.matmul(A, H.T)).diag() / 2  # divide by 2 for undirected
-    degrees = A.sum(dim=1)  # shape: (N,)
-    K_c = torch.matmul(H, degrees)  # shape: (C,)
-    n_c = soft_labels.sum(dim=0)  # shape: (C,)
-    rho_c = 2 * intra_c / (n_c * (n_c - 1)+1e-10)
-    Q_c = (2*intra_c - ((K_c**2) / (2 * m))) * (rho_c ** chi)
-    Q_g = Q_c.sum() / (2 * m)  # divide by 2*m to normalize
-
-    return Q_g
-
-def straight_through_hard_assignment(soft_labels):
-    hard_labels = F.one_hot(soft_labels.argmax(dim=1), num_classes=soft_labels.size(1)).float()
-    return hard_labels - soft_labels.detach() + soft_labels
-
-def calculate_rho(adj_mat, hard_labels,chi=1.0):
-    num_classes = hard_labels.shape[1]
-    class_indices = torch.argmax(hard_labels, dim=1)
-    m = adj_mat.sum()
-    Q_g = 0
-    for cls in range(num_classes):
-        nodes_in_class = (class_indices==cls).nonzero(as_tuple=True)[0]
-        class_edges_sum = adj_mat[nodes_in_class][:, nodes_in_class].sum()
-        degrees = len(nodes_in_class)*len(nodes_in_class-1)
-        rho_cls = (2*class_edges_sum)/(num_classes*(num_classes-1))
-        Q_g += (class_edges_sum - degrees**2/(2*m))*(rho_cls**chi)
-    return Q_g/(2*m)
-
-
-### train_model without rho
 def train_model(model, args, optimizer, D, criterion, Y_train, Y_val, Y_test, train_size, val_size, test_size, gamma, A_W):
-    # training_start_time = time.time()
-    # training the model and report accuracy
     max_val_acc = 0
     counter = 0
     A_D = D.to_dense() if D.is_sparse else D
@@ -58,10 +16,6 @@ def train_model(model, args, optimizer, D, criterion, Y_train, Y_val, Y_test, tr
     D_W = torch.sum(A_W,dim=0).to(args.device)
     e_W = (torch.sum(A_W)/2).to(args.device)
     B_W = (A_W  - torch.outer(D_W,D_W)/(2*e_W)).to(args.device)
-    # d_inv_sqrt = torch.pow(D_W, -0.5).to(args.device)
-    # d_inv_sqrt[torch.isinf(d_inv_sqrt)]=0.0
-    # D_inv_sqrt = torch.diag(d_inv_sqrt)
-    # laplacian_matrix = torch.eye(A_W.size(0), device=A_W.device)-D_inv_sqrt@A_W@D_inv_sqrt
     mod_weight =  args.mod_weight
     modularity_per_epoch = []  # To store modularity values per epoch
     for epoch in range(args.epochs):  # loop over the dataset multiple times
@@ -118,7 +72,6 @@ def train_model(model, args, optimizer, D, criterion, Y_train, Y_val, Y_test, tr
                                             num_classes=num_classes, average='micro')
         class_f1 = multiclass_f1_score(y_pred[train_size + val_size:], torch.argmax(Y_test, dim=1),
                                             num_classes=num_classes, average=None)
-        # class_f1_dict = {inverse_label_mapping[idx]: f1 for idx, f1 in enumerate(class_f1.cpu().numpy())}
 
         # print statistics
         if (epoch % 50) == 0:
@@ -136,9 +89,6 @@ def train_model(model, args, optimizer, D, criterion, Y_train, Y_val, Y_test, tr
             best_val_micro_f1 = val_micro_f1
             best_val_macro_f1 = val_macro_f1
             best_class_f1 = class_f1
-            # best_f1_dict=class_f1_dict
-            best_node_pred = y_pred
-            best_embeddings = embeddings
             counter = 0
         else:
             counter = counter + 1

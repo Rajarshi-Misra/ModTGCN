@@ -2,12 +2,10 @@ import os
 import optuna
 import matplotlib.pyplot as plt
 import pyttsx3
-from utils import speak_alert
 import optuna.visualization as vis
 import sys
 
 engine = pyttsx3.init()
-speak_alert("Let's start")
 # datasets = ['mr', 'r8', 'r52', 'ohsumed', '20ng']
 
 graph_construction = sys.argv[1] ##cosine||gaussian||matrix multiplication(matmul)
@@ -99,8 +97,6 @@ try:
 
 
     print("All datasets done!")
-    speak_alert("We are done")
 except Exception as e:
     print(e)
-    speak_alert("Please check this error")
     raise

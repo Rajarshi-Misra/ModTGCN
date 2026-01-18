@@ -9,7 +9,6 @@ class agg_adj(nn.Module):
         self.W_matrices = nn.ParameterList([nn.Parameter(torch.Tensor(A.shape[1], hl_size)) for A in A_matrices])
         self.W_out = nn.Parameter(torch.Tensor(hl_size, num_classes))
         self.act = nn.ReLU(True)
-        # self.act = lambda x: x
         self.num_adj = len(A_matrices)
         self.dropout = nn.Dropout(p=0.0)
 

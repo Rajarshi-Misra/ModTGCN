@@ -6,24 +6,7 @@ import scipy.sparse as sp
 import torch
 from math import log
 import os
-import networkx as nx
-import community as community_louvain
-import pyttsx3
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-from nltk.corpus import stopwords
-import string
-import json
-from collections import defaultdict
-import networkx as nx
-import community as community_louvain
-from sklearn.cluster import KMeans
-
-engine = pyttsx3.init()
-
-def speak_alert(message = "Error has occured"):
-    engine.say(message)
-    engine.runAndWait()
 
 def clean_str(string):
     """
@@ -44,12 +27,6 @@ def clean_str(string):
     string = re.sub(r"\?", " ? ", string)
     string = re.sub(r"\s{2,}", " ", string)
     return string.strip().lower()
-
-# def gaussian_dist(emb, sigma=7.439507691540258):
-#     sq_dists = torch.cdist(emb, emb, p=2) ** 2
-#     weight = torch.exp(-sq_dists / (2 * sigma ** 2))
-#     weight = weight - torch.diag(torch.diag(weight))
-#     return weight
 
 def count_freq(df: pd.DataFrame, ):
     word_freq = {}
@@ -90,19 +67,6 @@ def get_word_doc_list(df_main: pd.DataFrame, word_doc_list):
             else:
                 word_doc_list[word] = [i]
             appeared.add(word)
-
-
-def get_one_hot(df_main: pd.DataFrame, label_list):
-    y = []
-    for i in range(len(df_main)):
-        label = df_main.iloc[i]['label']
-        one_hot = [0 for l in range(len(label_list))]
-        label_index = label_list.index(label)
-        one_hot[label_index] = 1
-        y.append(one_hot)
-    y = np.array(y)
-    return y
-
 
 def find_word_pair_count(windows, word_id_map):
     word_pair_count = {}
@@ -187,30 +151,6 @@ def add_tfid(row, col, weight, df_main, word_id_map, train_size, val_size, test_
     #adj = torch.sparse_coo_tensor([row, col], weight, size=(node_size, node_size)) # this does not work, as strided operations are not supported
     return adj
 
-
-def normalize_adj(adj, EPS=1e-9):
-    rowsum = torch.sum(adj, dim=0, keepdim=True).to_dense() + EPS
-    colsum = torch.sum(adj, dim=1, keepdim=True).to_dense() + EPS
-    row_d_inv_sqrt = torch.pow(rowsum, -0.5).flatten()
-    col_d_inv_sqrt = torch.pow(colsum, -0.5).flatten()
-
-    row_d_mat_inv_sqrt = torch.sparse.spdiags(row_d_inv_sqrt, torch.tensor([0]), (len(row_d_inv_sqrt), len(row_d_inv_sqrt)))
-    col_d_mat_inv_sqrt = torch.sparse.spdiags(col_d_inv_sqrt, torch.tensor([0]), (len(col_d_inv_sqrt), len(col_d_inv_sqrt)))
-
-    ret = col_d_mat_inv_sqrt.mm(adj).mm(row_d_mat_inv_sqrt)
-    return ret
-
-def normalize_adj_sym(adj, colsum, rowsum, EPS=1e-9):
-
-    row_d_inv_sqrt = torch.pow(rowsum + EPS, -0.5).flatten()
-    col_d_inv_sqrt = torch.pow(colsum + EPS, -0.5).flatten()
-
-    row_d_mat_inv_sqrt = torch.sparse.spdiags(row_d_inv_sqrt, torch.tensor([0]), (len(row_d_inv_sqrt), len(row_d_inv_sqrt)))
-    col_d_mat_inv_sqrt = torch.sparse.spdiags(col_d_inv_sqrt, torch.tensor([0]), (len(col_d_inv_sqrt), len(col_d_inv_sqrt)))
-
-    ret = col_d_mat_inv_sqrt.mm(adj).mm(row_d_mat_inv_sqrt)
-    return ret
-
 def normalize_adj_pw(adj, colsum, rowsum, cpw, rpw, EPS=1e-9):
     col_pw = torch.pow(colsum + EPS, cpw).flatten()
     row_pw = torch.pow(rowsum + EPS, rpw).flatten()
@@ -220,72 +160,6 @@ def normalize_adj_pw(adj, colsum, rowsum, cpw, rpw, EPS=1e-9):
 
     ret = col_pw.mm(adj).mm(row_pw)
     return ret
-
-
-def row_normalize_adj(adj, EPS=1e-9):
-    colsum = torch.sum(adj, dim=1, keepdim=True).to_dense() + EPS
-    col_d_inv = torch.pow(colsum, -1).flatten()
-    col_d_mat_inv = torch.sparse.spdiags(col_d_inv, torch.tensor([0]), (len(col_d_inv), len(col_d_inv)))
-    ret = col_d_mat_inv.mm(adj)
-    return ret
-
-
-def modify_with_communities(W):
-    print('modifying')
-    def sparse_to_nx(sparse_matrix):
-        coo = sparse_matrix.coalesce()
-        print("---",coo)
-        rows, cols = coo.indices().cpu().numpy()
-        values = coo.values().cpu().numpy()
-        print(len(rows))
-        G = nx.Graph()
-        for r, c, v in zip(rows, cols, values):
-
-            G.add_edge(r, c, weight=v)
-        return G
-    G_W = sparse_to_nx(W)
-    print(G_W)
-    def detect_communities(G):
-        return community_louvain.best_partition(G)
-
-    communities_W = detect_communities(G_W)
-
-    def modify_graph_with_communities(G, communities):
-        for (u, v, data) in G.edges(data=True):
-            if communities[u] == communities[v]:
-                data['weight'] *= 1.5
-            # else:
-            #     data['weight'] *= 0.9
-        return G
-    
-    modified_G_W = modify_graph_with_communities(G_W, communities_W)
-    def nx_to_sparse(G, size):
-        rows, cols, weights = [], [], []
-        for (u, v, data) in G.edges(data=True):
-            rows.append(u)
-            cols.append(v)
-            weights.append(data['weight'])
-            # rows.append(u)
-            # cols.append(u)
-            # weights.append(1)
-            rows.append(v)
-            cols.append(u)
-            weights.append(data['weight'])
-            # rows.append(v)
-            # cols.append(v)
-            # weights.append(1)
-        
-        rows = torch.tensor(rows, dtype=torch.long)
-        cols = torch.tensor(cols, dtype=torch.long)
-        weights = torch.tensor(weights, dtype=torch.float32)
-
-        indices = torch.stack([rows, cols])
-        sparse_matrix = torch.sparse_coo_tensor(indices, weights, size=size)
-        return sparse_matrix
-    W_modified = nx_to_sparse(modified_G_W, W.shape)
-
-    return W_modified
-
 
 def mkdir(path):
     try:
