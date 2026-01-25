@@ -1,5 +1,4 @@
 import re
-from collections import Counter
 import pandas as pd
 import numpy as np
 import scipy.sparse as sp
@@ -30,7 +29,6 @@ def clean_str(string):
 
 def count_freq(df: pd.DataFrame, ):
     word_freq = {}
-    word_counter = Counter()
     for text in df['text']:
         words = text.split()
         for word in words:
@@ -188,113 +186,18 @@ class AdjacencyMatrixCreatorForModularity:
         """
         Creates the adjacency matrix using the specified method.
         """
-        if self.method == "from_symmetric":
-            return self._from_symmetric(doc_word_matrix, df_train, df_val, df_test, args)
-        elif self.method == "from_doc_word_symmetric":
-            return self._from_doc_word_symmetric(doc_word_matrix, word_word_matrix)
-        elif self.method == "from_sbert_embeddings":
-            return self._from_SBERT_embeddings(args, df_train, df_val, df_test)
+        if self.method == "from_sbert_embeddings":##TODO: NAME IT AS COSINE
+            return self._from_SBERT_embeddings_cosine(args, df_train, df_val, df_test)
         elif self.method == "from_sbert_embeddings_gaussian":
             return self._from_SBERT_embeddings_gaussian(args, df_train, df_val, df_test)
-        elif self.method == "from_gpt_embeddings_cosine":
-                return self._from_GPT_embeddings(args, df_train, df_val, df_test)
         else:
             raise ValueError(f"Unknown method: {self.method}")
 
-    def _from_symmetric(self, doc_word_matrix, df_train, df_val, df_test, args):
-        """
-        Create doc-doc adjacency matrix by multiplying normalized doc-word with its transpose.
-        """
-        # Compute degree matrices
-        D_left = torch.sum(doc_word_matrix, dim=1, keepdim=True).to_dense()
-        D_right = torch.sum(doc_word_matrix, dim=0, keepdim=True).to_dense()
-        D_lpw = -0.5
-        D_rpw = -0.5
-        # Normalize doc-word matrix
-        normalized_mat = normalize_adj_pw(doc_word_matrix, D_left, D_right, D_lpw, D_rpw).to_dense()
-        total_size = normalized_mat.shape[0]
-        # Cosine-like similarity: doc-doc adjacency
-        sim_matrix = torch.matmul(normalized_mat, normalized_mat.T)
-        if args.modify_graph:
-            adj_matrix = torch.zeros((total_size, total_size), dtype=torch.float32, device=sim_matrix.device)
-
-            train_labels = df_train['label'].values
-            train_size = len(train_labels)
-
-            # Build adjacency with top-k
-            for i in range(total_size):
-                # torch.topk instead of np.argsort
-                _, top_k_indices = torch.topk(sim_matrix[i], args.k)
-
-                for j in top_k_indices.tolist():
-                    if i == j:
-                        continue
-                    sim = sim_matrix[i, j]
-
-                    if i < train_size and j < train_size:
-                        if train_labels[i] == train_labels[j]:
-                            sim *= args.increase
-                        else:
-                            sim *= args.decrease
-
-                    adj_matrix[i, j] = sim
-                    adj_matrix[j, i] = sim
-
-            return adj_matrix
-
-        return sim_matrix
-
-
-    def _from_doc_word_symmetric(self, doc_word_matrix, word_word_matrix):
-        D_left = torch.sum(doc_word_matrix, dim=1, keepdim=True).to_dense()
-        D_right = torch.sum(doc_word_matrix, dim=0, keepdim=True).to_dense() + torch.sum(word_word_matrix, dim=0, keepdim=True).to_dense()
-        D_lpw = -0.5
-        D_rpw = -0.5
-        normalized_mat = normalize_adj_pw(doc_word_matrix, D_left, D_right, D_lpw, D_rpw).to_dense()
-        return torch.matmul(normalized_mat, normalized_mat.T)
-
-    def _from_SBERT_embeddings(self, args, df_train, df_val, df_test):
+    def _from_SBERT_embeddings_cosine(self, args, df_train, df_val, df_test):
         documents = np.concatenate([df_train['text'].values, df_val['text'].values, df_test['text'].values])
         sbert_model = SentenceTransformer(args.llm)
         embeddings = sbert_model.encode(documents, convert_to_tensor=True)
         embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)  # [N, D]
-        sim_matrix = torch.matmul(embeddings, embeddings.T)
-        if args.modify_graph:
-            total_size = sim_matrix.size(0)
-            adj_matrix = torch.zeros_like(sim_matrix, dtype=torch.float32)
-
-            train_labels = df_train['label'].values
-            train_size = len(train_labels)
-
-            _, top_k_indices = torch.topk(sim_matrix, args.k, dim=1)
-
-            for i in range(total_size):
-                for j in top_k_indices[i]:
-                    if i == j:  
-                        continue
-                    sim = sim_matrix[i, j]
-                    if i < train_size and j < train_size:
-                        if train_labels[i] == train_labels[j]:
-                            sim *= args.increase
-                        else:
-                            sim *= args.decrease
-                    adj_matrix[i, j] = sim
-                    adj_matrix[j, i] = sim
-            return adj_matrix
-
-        return sim_matrix
-
-    def _from_GPT_embeddings(self, args, df_train, df_val, df_test):
-        train_embeddings = np.load(f"./embeddings/gpt/{args.dataset}/train.npy")
-        val_embeddings = np.load(f"./embeddings/gpt/{args.dataset}/val.npy")
-        test_embeddings = np.load(f"./embeddings/gpt/{args.dataset}/test.npy")
-        
-        # Concatenate to single [N, D] array, then convert to torch tensor
-        embeddings = np.concatenate([train_embeddings, val_embeddings, test_embeddings])
-        print(embeddings.shape)
-        embeddings = torch.tensor(embeddings, dtype=torch.float32)  # [N, D]
-        embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)  # L2 normalize
-        
         sim_matrix = torch.matmul(embeddings, embeddings.T)
         if args.modify_graph:
             total_size = sim_matrix.size(0)
