@@ -55,23 +55,13 @@ def main(args):
         with open(adj_filename, 'wb') as file:
             pickle.dump(adj, file)
     #Create adjacenncy matrix for modularity loss
-    if args.graph_construction == 'matmul':
-        creator = AdjacencyMatrixCreatorForModularity(method="from_symmetric")
-        # mod_adj_matrix = creator.create(args=args, df_train=df_train, df_val=df_val, df_test=df_test) #symmetric matrix
-        mod_adj_matrix = creator.create(doc_word_matrix=D, df_train=df_train, df_val=df_val, df_test=df_test, args=args)
-        mod_adj_matrix = mod_adj_matrix.to(device)
-    elif args.graph_construction == 'gaussian':
+    if args.graph_construction == 'gaussian':
         creator = AdjacencyMatrixCreatorForModularity(method="from_sbert_embeddings_gaussian")
         # mod_adj_matrix = creator.create(args=args, df_train=df_train, df_val=df_val, df_test=df_test) #symmetric matrix
         mod_adj_matrix = creator.create(doc_word_matrix=D, df_train=df_train, df_val=df_val, df_test=df_test, args=args)
         mod_adj_matrix = mod_adj_matrix.to(device)
-    elif args.graph_construction == 'cosine' and args.llm != 'gpt':
-        creator = AdjacencyMatrixCreatorForModularity(method="from_sbert_embeddings")
-        # mod_adj_matrix = creator.create(args=args, df_train=df_train, df_val=df_val, df_test=df_test) #symmetric matrix
-        mod_adj_matrix = creator.create(doc_word_matrix=D, df_train=df_train, df_val=df_val, df_test=df_test, args=args)
-        mod_adj_matrix = mod_adj_matrix.to(device)
-    elif args.graph_construction == 'cosine' and args.llm == 'gpt':
-        creator = AdjacencyMatrixCreatorForModularity(method="from_gpt_embeddings_cosine")
+    elif args.graph_construction == 'cosine':
+        creator = AdjacencyMatrixCreatorForModularity(method="from_sbert_embeddings_cosine")
         # mod_adj_matrix = creator.create(args=args, df_train=df_train, df_val=df_val, df_test=df_test) #symmetric matrix
         mod_adj_matrix = creator.create(doc_word_matrix=D, df_train=df_train, df_val=df_val, df_test=df_test, args=args)
         mod_adj_matrix = mod_adj_matrix.to(device)
