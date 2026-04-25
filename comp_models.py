@@ -3,10 +3,10 @@ import sys
 
 import numpy as np
 from load_data import load
-from utils import mkdir, normalize_adj_pw,AdjacencyMatrixCreatorForModularity
+from src.utils import mkdir, normalize_adj_pw,AdjacencyMatrixCreatorForModularity
 import torch
 from agg_adj import *
-from build_adj import build_adj_pmi_tfidf
+from src.graph.adjacency import build_adj_pmi_tfidf
 import os
 from pathlib import Path
 from train_model import train_model
